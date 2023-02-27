@@ -105,3 +105,48 @@
   - incremental file : 마지막으로 base file이 생성된 이후의 변경사항이 쌓임
   - manifest file : 파일들을 관리하기 위한 메타 데이터를 저장 
 
+---
+
+# Redis replication(복제)
+
+- 백업만으로는 장애 대비에 부족함 (백업 실패 가능성, 복구에 소요되는 시간)
+- Redis도 복제를 통해 가용성을 확보하고 빠른 장애조치가 가능
+- master가 죽었을 경우 replica 중 하나를 master로 전환해 즉시 서비스 정상화 가능
+- 복제본(replica)은 read-only 노드로 사용 가능하므로 traffic 분산도 가능
+
+
+![image](https://user-images.githubusercontent.com/40031858/221554951-9bf95224-ef77-4800-b6dc-39ab9fdd011d.png)
+
+### Redis 복제 사용
+
+- Replica 노드에서만 설정을 적용해 master-replica 복제 구성 가능
+
+`Replica로 동작하도록 설정`
+
+    replicaof 127.0.0.1 6379
+
+`Replica는 read-only로 설정`
+
+    replica-read-only
+
+>> `Master 노드에는 RDB나 AOF를 이용한 백업 기능 활성화가 필수! (재시작 후에 비어있는 데이터 상태가 복제되지 않도록)`
+
+
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/40031858/221558072-bd8d9ff2-2592-43ea-999c-d95e81e6ff82.png">
+
+
+
+<img width="838" alt="image" src="https://user-images.githubusercontent.com/40031858/221558539-ad218e32-f00f-4e04-8c9c-98ddab415344.png">
+
+마스터에 키를 입력했을 때 replica에서 잘 적용됨을 볼 수 있음.
+
+</details>
+
+<details>
+<summary> 참고로 이 레포지토리에 `docker-compose`를 작성했으니 `docker-compose up --build` 명령어를 수행하면댐.
+</summary>
+<img width="987" alt="image" src="https://user-images.githubusercontent.com/40031858/221560476-3bb2f1bc-2f7a-44ae-9340-5cf6be49d20f.png">
+</details>
+
+
