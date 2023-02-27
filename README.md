@@ -150,3 +150,27 @@
 </details>
 
 
+---
+
+# Redis Sentinel을 이용한 자동 장애 조치
+
+### Redis Sentinel
+
+- Redis에서 HA(high availability)를 제공하기 위한 장치
+- master-replica 구조에서 master가 다운 시 replica를 master로 승격시키는 auto-failover를 수행
+
+![image](https://user-images.githubusercontent.com/40031858/221562004-0ffdaf6f-052d-4efa-a0d5-a57f9540f45c.png)
+
+### Redis Sentinel 실제 구성도
+
+![image](https://user-images.githubusercontent.com/40031858/221562516-55d1b269-3b1f-4585-8426-7f6c857b7c87.png)
+
+### Redis Sentinel 특징
+
+- SDOWN(Subjective down)과 ODOWN(Object down)의 2가지 판단이 있음
+  - SDOWN: Sentinel 1대가 down으로 판단 (주관적)
+  - ODOWN: 정족수가 충족되어 down으로 판단 (객관적)
+- master 노드가 down된걸로 판단되기 위해서는 Sentinel 노드들이 정족수(Quorum)을 충족해야 함
+- 클라이언트는 Sentinel을 통해 master의 주소를 얻어내야 함
+
+<img width="560" alt="image" src="https://user-images.githubusercontent.com/40031858/221573970-425c60ef-dcad-449b-bd81-ca2db37d773d.png">
