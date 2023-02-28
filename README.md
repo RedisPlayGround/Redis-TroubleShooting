@@ -174,3 +174,9 @@
 - 클라이언트는 Sentinel을 통해 master의 주소를 얻어내야 함
 
 <img width="560" alt="image" src="https://user-images.githubusercontent.com/40031858/221573970-425c60ef-dcad-449b-bd81-ca2db37d773d.png">
+
+
+<img width="1083" alt="image" src="https://user-images.githubusercontent.com/40031858/221574404-bb0851c3-46af-4fb9-ac1e-bd1c7230e595.png">
+
+
+
